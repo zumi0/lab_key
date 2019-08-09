@@ -1,14 +1,15 @@
+import pandas as pd
 import nfc
+import id_detect
 
-def CONNECTED(tag):
-    servc = 0x100B
-    service_code = [nfc.tag.tt3.ServiceCode(servc >> 6, servc & 0x3f)]
-    # bc_id -> student ID
-    bc_id = [nfc.tag.tt3.BlockCode(i) for i in range(3)]
-    print(tag.read_without_encryption(service_code, bc_id)[14:23].decode())
-    return False
+id_list = pd.read_csv('sids.csv').sid.tolist()
 
 while True:
     clf = nfc.ContactlessFrontend('usb')
-    clf.connect(rdwr={'on-connect': CONNECTED})
-    clf.close()
+    try:
+        clf.connect(rdwr={'on-connect': id_detect.CONNECTED})
+    finally:
+        clf.close()
+    f = open('sid', 'r')
+    if int(f.read()) in id_list:
+        print("OK")
