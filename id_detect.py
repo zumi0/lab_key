@@ -1,5 +1,6 @@
 # started on 9 AUG 2019
 # Base script was provided by TOQUE
+# https://uepon.hatenadiary.com/category/nfc
 
 import nfc
 
