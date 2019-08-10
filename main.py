@@ -1,8 +1,13 @@
-import pandas as pd
+import csv
 import nfc
 import id_detect
+import servo
 
-id_list = pd.read_csv('sids.csv').sid.tolist()
+with open("sids.csv", "r") as file_obj:
+    csv_obj = csv.reader(file_obj)
+    id_list = []
+    for row in csv_obj:
+        id_list.append(row[0])
 
 while True:
     clf = nfc.ContactlessFrontend('usb')
@@ -11,5 +16,7 @@ while True:
     finally:
         clf.close()
     f = open('sid', 'r')
-    if int(f.read()) in id_list:
+    if f.read() in id_list:
         print("OK")
+        servo.servo()
+    f.close()
