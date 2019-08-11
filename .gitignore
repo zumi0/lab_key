@@ -1,4 +1,6 @@
 .python-version
-sid
-sids.csv
+id
+ids.csv
 __pycache__/
+id_detect.py
+test.py
