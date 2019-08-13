@@ -15,3 +15,5 @@ how to stop nohup
 ps -x
 kill ID
 ```
+
+The target of plain cards -> **106A**
