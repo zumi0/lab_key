@@ -4,3 +4,4 @@ ids.csv
 __pycache__/
 id_detect.py
 test.py
+write_id.py
