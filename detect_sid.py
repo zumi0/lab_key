@@ -8,5 +8,8 @@ def DETECT_SID(tag):
     # bc_id -> student ID
     bc_id = [nfc.tag.tt3.BlockCode(i) for i in range(3)]
     with open('./id', mode='w') as f:
-        f.write(tag.read_without_encryption(service_code, bc_id)[14:23].decode())
+        if tag.read_without_encryption(service_code, bc_id)[14:23].decode()[0] == '2':
+            f.write(tag.read_without_encryption(service_code, bc_id)[14:23].decode())
+        else:
+            f.write(tag.read_without_encryption(service_code, bc_id)[15:23].decode())
         return False
